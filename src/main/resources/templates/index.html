@@ -1,0 +1,34 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org">
+    <div>
+        <table>
+        <tr th:if="${validationError}" th:each="error : ${validationError}">
+            <td style="color: red;" th:text="${error}"></td>
+        </tr>
+        </table>
+        <form action="/confirm" method="post">
+            <div>送信元</div>
+            <div>
+                <input type="text" id="from" name="from" value="info@linkc-19.com" readonly>
+            </div>
+            <div>宛先</div>
+            <div>
+                <input type="email" id="sendTo" name="sendTo">
+            </div>
+            <div>件名</div>
+            <div>
+                <input type="text" id="subject" name="subject">
+            </div>
+            <div>内容</div>
+            <div>
+                <textarea id="content" name="content" rows="3" cols=""></textarea>
+            </div>
+            <div>
+                <input type="reset" value="クリア">
+            </div>
+            <div>
+                <input type="submit" value="送信する">
+            </div>
+        </form>
+    </div>
+</html>
