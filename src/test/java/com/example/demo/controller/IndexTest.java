@@ -23,7 +23,7 @@ class IndexTest {
 
 	@Test
 	void トップ画面遷移テスト() throws Exception {
-		//		System.out.println("トップ画面遷移テスト 開始");
+		System.out.println("トップ画面遷移テスト 開始");
 
 		mockMvc.perform(MockMvcRequestBuilders.get("/")).andExpect(MockMvcResultMatchers.status().isOk())
 				.andExpect(MockMvcResultMatchers.view().name("index")).andReturn();
@@ -45,7 +45,7 @@ class IndexTest {
 
 		mockMvc.perform(MockMvcRequestBuilders.post("/confirm").flashAttr("mailForm", mailForm))
 				.andExpect(MockMvcResultMatchers.status().isOk())
-				.andExpect(MockMvcResultMatchers.view().name("confirm"))
+				.andExpect(MockMvcResultMatchers.view().name("complete"))
 				.andReturn();
 
 		System.out.println("確認画面遷移テスト 終了");

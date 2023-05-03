@@ -40,8 +40,12 @@ public class ContactController {
 
 		//		model.addAttribute("mailForm", mailForm);
 		//		return "confirm";
+		try {
+			sendMailService.send(mailForm);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
-		//		sendMailService.send(mailForm);
 		sendMailService.create(mailForm);
 		return "complete";
 
@@ -49,7 +53,12 @@ public class ContactController {
 
 	@PostMapping("/complete")
 	public String complete(@ModelAttribute MailForm mailForm) {
-		sendMailService.send(mailForm);
+		try {
+			sendMailService.send(mailForm);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 		sendMailService.create(mailForm);
 		return "complete";
 	}

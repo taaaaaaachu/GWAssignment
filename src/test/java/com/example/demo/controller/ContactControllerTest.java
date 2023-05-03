@@ -2,13 +2,19 @@ package com.example.demo.controller;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.model.MailForm;
 import com.example.demo.repository.MailRepository;
@@ -179,12 +185,16 @@ class ContactControllerTest {
 	void メール送信確認() throws Exception {
 		System.out.println("メール送信確認 開始");
 
+		MultipartFile multipartFile = new MockMultipartFile("test.text",
+				new FileInputStream(new File("../mail/src/test/java/testfile/test.text")));
+
 		// メールオブジェクトを生成
 		MailForm mailForm = new MailForm();
 		mailForm.setFrom("info@linkc-19.com");
 		mailForm.setSendTo("test@example.com");
 		mailForm.setSubject("test");
 		mailForm.setContent("testtest");
+		mailForm.setFile(multipartFile);
 		System.out.println("mailForm" + mailForm);
 
 		try {
@@ -194,6 +204,39 @@ class ContactControllerTest {
 		}
 
 		System.out.println("メール送信確認 終了");
+	}
+
+	// 空のファイルを生成
+	static void createNewFile(String fileName) {
+
+		// ファイルのパスを設定(\はエスケープしなければいけないため\の前に\を記述)
+		String filePath = "C:\\sample\\" + fileName + ".txt";
+
+		// Fileオブジェクトの生成
+		File file = new File(filePath);
+
+		try {
+
+			// ファイルを生成
+			Boolean createNewFile = file.createNewFile();
+
+			if (createNewFile) {
+
+				System.out.println("ファイル作成：成功");
+
+			} else {
+
+				System.out.println("ファイル作成：失敗");
+
+			}
+
+		} catch (IOException e) {
+
+			System.out.println("例外発生");
+			System.out.println(e);
+
+		}
+
 	}
 
 	@Test
