@@ -23,8 +23,12 @@ public class SendMailService {
 
 	public void send(MailForm mailForm) {
 		SimpleMailMessage msg = new SimpleMailMessage();
+
+		//メールフォームの宛先をカンマ区切りで配列化
+		String[] to = mailForm.getSendTo().split(",");
+
 		msg.setFrom(mailForm.getFrom());
-		msg.setTo(mailForm.getSendTo()); // 管理者アドレス
+		msg.setTo(to);
 		msg.setSubject(mailForm.getSubject());
 		msg.setText(mailForm.getContent());
 		mailSender.send(msg);
@@ -41,7 +45,7 @@ public class SendMailService {
 
 		Mail mail = new Mail();
 		mail.setFrom(mailForm.getFrom());
-		mail.setTo(mailForm.getFrom());
+		mail.setTo(mailForm.getSendTo());
 		mail.setSubject(mailForm.getSubject());
 		mail.setDetail(mailForm.getContent());
 		mail.setInsertDate(now);
