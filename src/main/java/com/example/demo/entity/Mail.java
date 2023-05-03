@@ -34,4 +34,7 @@ public class Mail {
 	@Column(name = "insert_date")
 	private Timestamp insertDate;
 
+	@Column(name = "attachment")
+	private byte[] file;
+
 }

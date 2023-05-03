@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.entity.Mail;
 import com.example.demo.model.MailForm;
@@ -43,15 +44,33 @@ public class SendMailService {
 		LocalDateTime dateTime = LocalDateTime.now();
 		Timestamp now = Timestamp.valueOf(dateTime);
 
+		MultipartFile multipartFile = mailForm.getFile();
+
+		byte[] file = fileByteConverter(multipartFile);
+
 		Mail mail = new Mail();
 		mail.setFrom(mailForm.getFrom());
 		mail.setTo(mailForm.getSendTo());
 		mail.setSubject(mailForm.getSubject());
 		mail.setDetail(mailForm.getContent());
 		mail.setInsertDate(now);
+		mail.setFile(file);
 
 		return mail;
 
+	}
+
+	public byte[] fileByteConverter(MultipartFile multipartFile) {
+		try {
+			//アップロードファイルをバイト配列に変換
+			byte[] file = multipartFile.getBytes();
+
+			return file;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	//	public String makeContent(MailForm mailForm) {

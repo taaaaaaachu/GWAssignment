@@ -1,15 +1,17 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
     <div th:object="${mailForm}">
-        <form action="/complete" method="post">
+        <form action="/complete" method="post" enctype="multipart/form-data">
             <div><span th:text="*{from}"></span></div>
             <div><span th:text="*{sendTo}"></span></div>
             <div><span th:text="*{subject}"></span></div>
             <div><span th:text="*{content}"></span></div>
+            <div><span th:text="*{file}"></span></div>
             <div>
                 <input type="hidden" th:field="*{from}" value="*{from}">
                 <input type="hidden" th:field="*{sendTo}" value="*{sendTo}">
                 <input type="hidden" th:field="*{subject}" value="*{subject}">
                 <input type="hidden" th:field="*{content}" value="*{content}"/>
+                <input type="hidden" th:field="*{file}" value="*{file}"/>
                 <input type="submit" value="上記内容で送信する">
             </div>
         </form>

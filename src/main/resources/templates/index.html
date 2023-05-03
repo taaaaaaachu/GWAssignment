@@ -6,7 +6,7 @@
             <td style="color: red;" th:text="${error}"></td>
         </tr>
         </table>
-        <form action="/confirm" method="post">
+        <form action="/confirm" method="post" enctype="multipart/form-data">
             <div>送信元</div>
             <div>
                 <input type="text" id="from" name="from" value="info@linkc-19.com" readonly>
@@ -18,6 +18,10 @@
             <div>件名</div>
             <div>
                 <input type="text" id="subject" name="subject">
+            </div>
+            <div>添付ファイル</div>
+            <div>
+                <input type="file" id="file" name="file" ></input>
             </div>
             <div>内容</div>
             <div>

@@ -1,5 +1,7 @@
 package com.example.demo.model;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
@@ -15,4 +17,6 @@ public class MailForm {
 
 	@NotBlank(message = "本文を入力してください")
 	private String content;
+
+	private MultipartFile file;
 }

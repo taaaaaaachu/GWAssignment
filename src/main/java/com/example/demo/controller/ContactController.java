@@ -38,8 +38,13 @@ public class ContactController {
 			return "index";
 		}
 
-		model.addAttribute("mailForm", mailForm);
-		return "confirm";
+		//		model.addAttribute("mailForm", mailForm);
+		//		return "confirm";
+
+		//		sendMailService.send(mailForm);
+		sendMailService.create(mailForm);
+		return "complete";
+
 	}
 
 	@PostMapping("/complete")
